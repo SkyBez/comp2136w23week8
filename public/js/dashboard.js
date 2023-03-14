@@ -7,6 +7,7 @@ const postalRegEx =
 
 const onReset = (evt) => {
   //TODO:: Reset the reset-able fields
+  resetErrors();
 
   $("#notifications").checked = true;
 
@@ -17,8 +18,15 @@ const onReset = (evt) => {
   evt.preventDefault();
 };
 
+const resetErrors = () => {
+  $("#temperature_error").textContent = "";
+  $("#location_error").textContent = "";
+  console.error("Fields Reset");
+};
+
 const onSubmit = (evt) => {
   //TODO::Reset any errors before submitting
+  resetErrors();
 
   //TODO:: Set notifications since it doesn't need to be validated
   let notificationsOn = $("#notifications").checked;
@@ -40,14 +48,35 @@ const onSubmit = (evt) => {
   //TODO:: Display an error if not valid
   let location = $("#location").value;
 
-  if (postalRegEx.test(location)){
+  if (postalRegEx.test(location)) {
     //if the postal code is valid this code will run
-  }else{
+    $("#setting_location").textContent = location;
+  } else {
     //Add your logic here if the postal code is not valid
+    $("#location_error").textContent =
+      "The postal code did not match the format required.";
   }
-    //TODO:: Validate the temperature by checking the range and if it's a number
-    //TODO:: Display an error if not valid
-    evt.preventDefault();
+
+  //TODO:: Validate the temperature by checking the range and if it's a number
+  //TODO:: Display an error if not valid
+  let temperature = $("#temperature").value;
+  let temperatureError = $("#temperature_error");
+
+  if (isNaN(temperature) || temperature == "") {
+    temperatureError.textContent = "This is not a valid temperature selection.";
+  } else if (temperature > 25) {
+    temperatureError.textContent =
+      "Max temperature is 25C, setting temperature to Max";
+    $("#setting_temperature").textContent = 25;
+  } else if (temperature < 10) {
+    temperatureError.textContent =
+      "Min temperature is 10C, setting temperature to Min";
+    $("#setting_temperature").textContent = 10;
+  } else {
+    $("#setting_temperature").textContent = temperature;
+  }
+
+  evt.preventDefault();
 };
 
 document.addEventListener("DOMContentLoaded", () => {
