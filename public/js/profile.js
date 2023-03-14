@@ -9,12 +9,12 @@ const passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z]).{8,}$/;
 const onReset = (evt) => {
   resetErrors();
   //TODO:: Reset the reset-able fields
-  $("first_name").value = "";
-  $("last_name").value = "";
-  $("email").value = "";
+  $("#first_name").value = "";
+  $("#last_name").value = "";
+  $("#email").value = "";
 
-  $("password").value = "";
-  $("confirm_password").value = "";
+  $("#password").value = "";
+  $("#confirm_password").value = "";
 
   evt.preventDefault();
 };
