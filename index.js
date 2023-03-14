@@ -4,7 +4,7 @@ const app = express();
 
 app.use(express.static("public"));
 
-const PORT = 4000;
+const PORT = 3000;
 
 app.listen(PORT, () => {
   console.log("App listening on port ", PORT);
@@ -20,4 +20,12 @@ app.get("/profile", (req, res) => {
 
 app.get("/math", (req, res) => {
   res.sendFile(path.resolve(__dirname + "/views/", "math.html"));
+});
+
+app.get("/faq", (req, res) => {
+  res.sendFile(path.resolve(__dirname + "/views/", "faq.html"));
+});
+
+app.get("/terms", (req, res) => {
+  res.sendFile(path.resolve(__dirname + "/views/", "terms.html"));
 });
