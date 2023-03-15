@@ -8,9 +8,10 @@ let timer = null;
 let counter = 10;
 
 const goToTerms = () => {
-  counter--;
-  if (counter > 0) {
-    window.location.href = window.location.host + "/terms";
+  //Count down from 10, if above 0 update seconds text, if at 0, send to the terms page
+  counter - 1;
+  if (counter <= 0) {
+    window.location ="https://" + window.location.host + "/terms";
   } else {
     $("#seconds").value = counter; // update number of seconds
   }
@@ -18,7 +19,7 @@ const goToTerms = () => {
 
 const acceptTerms = () => {
   // code to accept terms goes here
-  //clearTimeout( timer );
+
   clearInterval(timer);
   $("#terms").setAttribute("class", "hidden");
 };
@@ -41,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!accepted) {
     // user hasn't accepted terms
-    //timer = setTimeout(goToTerms, 10000);
     timer = setInterval(goToTerms, 1000);
     $("accept").addEventListener("click", acceptTerms);
   } else {
